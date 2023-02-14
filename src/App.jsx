@@ -6,33 +6,19 @@ import { ThemeContext } from './context/ThemeContext';
 
 function App() {
   const localData = false;
-  const {theme, setTheme} = useContext(ThemeContext)
+  const { theme, setTheme } = useContext(ThemeContext);
 
   if (localData) {
     return (
       <main className={`${theme}`}>
-        <Routes>
-          <Route />
-        </Routes>
+        <PrivateApp></PrivateApp>
       </main>
     );
   }
 
   return (
-    <main className={`${theme}`} >
-      <Routes>
-        <Route
-          path='/'
-          index
-          element={<Navigate to='/login' />}
-        />
-        <Route
-          path='/login'
-          element={<PublicApp></PublicApp>}
-        />
-
-        <Route path='/register' />
-      </Routes>
+    <main className={theme}>
+      <PublicApp></PublicApp>
     </main>
   );
 }
