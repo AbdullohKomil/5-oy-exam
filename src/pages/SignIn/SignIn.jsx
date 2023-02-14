@@ -49,9 +49,6 @@ export const SignIn = () => {
         />
       </div>
       <div className='flex justify-center items-center h-screen dark:bg-black w-2/4'>
-        <button onClick={() => setTheme(theme === 'dark' ? '' : 'dark')}>
-          DARK
-        </button>
         <Formik
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
