@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import LoginIcon from '../../assets/images/LogIn.svg';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { api } from '../../api/api';
 import { ThemeContext } from '../../context/ThemeContext';
+import { setToken } from '../../redux/token/tokenAction';
+import { setUser } from '../../redux/user/userAction';
+import { useDispatch } from 'react-redux';
 
 export const SignIn = () => {
   const validationSchema = Yup.object({
@@ -22,15 +25,27 @@ export const SignIn = () => {
     email: '',
     password: '',
   };
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const userLogin = async (values) => {
-    const data = await api.userLogin(values);
+    const data = await api.userLogin(values).catch((err) => console.log(err));
 
-    const user = await api.getUser();
+    console.log(data);
+
+    const user = await api
+      .getUser(data?.data?.token || localStorage.getItem('token'))
+      .catch((err) => console.log(err));
+
+    console.log(user);
 
     if (data.status === 201) {
-      localStorage.setItem('token', data.data.accessToken);
-      localStorage.setItem('user');
+      localStorage.setItem('token', data.data.token);
+      localStorage.setItem('user', JSON.stringify(user.data));
+      dispatch(setToken(data.data.token));
+      dispatch(setUser(user.data));
+      navigate('/');
     }
   };
 

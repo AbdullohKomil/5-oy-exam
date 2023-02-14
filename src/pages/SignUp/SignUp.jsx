@@ -1,12 +1,20 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { api } from '../../api/api';
-
+import { useDispatch } from 'react-redux';
 import RegisterIcon from '../../assets/images/Register.svg';
+import axios from 'axios';
+import { setToken } from '../../redux/token/tokenAction';
+import { setUser } from '../../redux/user/userAction';
 
 export const SignUp = () => {
+
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch();
+
   const validationSchema = Yup.object({
     first_name: Yup.string().required('Required first name'),
     last_name: Yup.string().required('Required last name'),
@@ -28,21 +36,30 @@ export const SignUp = () => {
     password: '',
   };
 
-  const userLogin = async (values) => {
-    const data = await api.userRegister(values);
+  const userRegister = async (values) => {
+    const data = await api
+      .userRegister(values)
+      .catch((err) => console.log(err));
 
-    console.log(values);
+    console.log(data);
 
-    const user = await api.getUser();
+    const user = await api
+      .getUser(data?.data?.token || localStorage.getItem('token'))
+      .catch((err) => console.log(err));
+
+    console.log(user);
 
     if (data.status === 201) {
-      localStorage.setItem('token', data.data.accessToken);
-      localStorage.setItem('user');
+      localStorage.setItem('token', data.data.token);
+      localStorage.setItem('user', JSON.stringify(user.data));
+      dispatch(setToken(data.data.token))
+      dispatch(setUser(user.data))
+      navigate('/')
     }
   };
 
   const handleSubmit = (values) => {
-    userLogin(values);
+    userRegister(values);
   };
 
   return (
@@ -94,7 +111,7 @@ export const SignUp = () => {
               </span>
               <Field
                 name='phone'
-                type='number'
+                type='text'
                 className='focus:outline-none dark:text-white dark:bg-black block border-2 border-solid pr-40 mt-5 pl-10 py-4 border-slate-200 rounded-lg'
                 placeholder='Phone'
               />
@@ -120,7 +137,7 @@ export const SignUp = () => {
               <span className='text-red-600'>
                 <ErrorMessage name='password' />
               </span>
-              <button            
+              <button
                 type='submit'
                 className=' dark:bg-white
                 dark:text-black
