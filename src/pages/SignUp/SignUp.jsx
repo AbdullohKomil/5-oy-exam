@@ -10,8 +10,7 @@ import { setToken } from '../../redux/token/tokenAction';
 import { setUser } from '../../redux/user/userAction';
 
 export const SignUp = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -52,9 +51,9 @@ export const SignUp = () => {
     if (data.status === 201) {
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('user', JSON.stringify(user.data));
-      dispatch(setToken(data.data.token))
-      dispatch(setUser(user.data))
-      navigate('/')
+      dispatch(setToken(data.data.token));
+      dispatch(setUser(user.data));
+      navigate('/');
     }
   };
 

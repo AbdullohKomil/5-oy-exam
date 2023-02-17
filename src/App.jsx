@@ -7,12 +7,17 @@ import { ThemeContext } from './context/ThemeContext';
 import { setToken } from './redux/token/tokenAction';
 import { setUser } from './redux/user/userAction';
 import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
+import 'slick-carousel/slick/slick-theme.css';
+import { AddAuthor } from './pages/AddAuthor/AddAuthor';
+
+import 'react-toastify/dist/ReactToastify.css';
+import { AddBook } from './pages/AddBook/AddBook';
 function App() {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.token.token);
+
 
   dispatch(setToken(localStorage.getItem('token')) || '');
   dispatch(setUser(JSON.parse(localStorage.getItem('user')) || ''));
@@ -21,16 +26,30 @@ function App() {
 
   if (token) {
     return (
-      <main className={theme}>
-        <PrivateApp></PrivateApp>
-      </main>
+      <>
+        <main className={`${theme} `}>
+          <PrivateApp></PrivateApp>
+          <Routes>
+            <Route
+              path='/addAuthor'
+              element={<AddAuthor />}
+            />
+            <Route
+              path='/addBook'
+              element={<AddBook />}
+            />
+          </Routes>
+        </main>
+      </>
     );
   }
   if (!token) {
     return (
-      <main className={theme}>
-        <PublicApp></PublicApp>
-      </main>
+      <>
+        <main className={`${theme}`}>
+          <PublicApp></PublicApp>
+        </main>
+      </>
     );
   }
 }

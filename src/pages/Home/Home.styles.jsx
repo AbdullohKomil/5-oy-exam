@@ -10,6 +10,7 @@ export const Hero = styled.div`
   border-radius: 21px;
   width: 100%;
   height: 346px;
+  position: relative;
 `;
 
 export const NavigationSpan = styled.span`
@@ -18,23 +19,18 @@ export const NavigationSpan = styled.span`
   border-radius: 10px;
   width: 55px;
   height: 3px;
-  background: rgba(255, 255, 255, 0.6);
+  top: 260px;
   &:nth-child(1) {
-    top: 350px;
-    background-color: #fff;
-    left: 360px;
+    left: 110px;
   }
   &:nth-child(2) {
-    top: 350px;
-    left: 420px;
+    left: 170px;
   }
   &:nth-child(3) {
-    top: 350px;
-    left: 480px;
+    left: 230px;
   }
   &:nth-child(4) {
-    top: 350px;
-    left: 540px;
+    left: 290px;
   }
 `;
 
@@ -46,8 +42,8 @@ export const HeroTitle = styled.h2`
   width: 337px;
   position: absolute;
   z-index: 3;
-  left: 350px;
-  top: 110px;
+  left: 110px;
+  top: 45px;
 `;
 
 export const ShadowFormBox = styled.div`
@@ -55,7 +51,7 @@ export const ShadowFormBox = styled.div`
   background: #ffffff;
   box-shadow: 0px 4px 77px rgba(0, 0, 0, 0.25);
   top: 370px;
-  left: 500px;
+  left: calc(50% - 530px);
   border-radius: 15px;
 `;
 
@@ -71,7 +67,8 @@ export const ShadowBoxTitle = styled.h3`
 `;
 
 export const SearchForm = styled.form`
-padding: 0px 73px 29px  ;`;
+  padding: 0px 73px 29px;
+`;
 
 export const SearchInput = styled.input`
   padding: 12px 383px 12px 27px;
@@ -89,5 +86,4 @@ export const SubmitSearchButton = styled.button`
   background: #c9ac8c;
   border-radius: 15px;
   color: white;
-
 `;

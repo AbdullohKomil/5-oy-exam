@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         LogIn: '#C9AC8C',
+        bgSliderSpan: '#ffffff99',
       },
     },
   },

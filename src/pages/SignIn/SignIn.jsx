@@ -84,7 +84,7 @@ export const SignIn = () => {
             <Field
               name='email'
               type='email'
-              className='focus:outline-none dark:bg-black block border-2 border-solid pr-40 mt-10 pl-10 py-4 border-slate-200 rounded-lg'
+              className='focus:outline-none dark:bg-black dark:text-white block border-2 border-solid pr-40 mt-10 pl-10 py-4 border-slate-200 rounded-lg'
               placeholder='Email'
             />
             <span className='text-red-600'>
@@ -93,7 +93,7 @@ export const SignIn = () => {
             <Field
               name='password'
               type='password'
-              className='focus:outline-none dark:bg-black block border-2 border-solid pr-40 mt-5 pl-10 py-4 border-slate-200 rounded-lg'
+              className='focus:outline-none dark:bg-black dark:text-white block border-2 border-solid pr-40 mt-5 pl-10 py-4 border-slate-200 rounded-lg'
               placeholder='Password'
             />
             <span className='text-red-600'>
