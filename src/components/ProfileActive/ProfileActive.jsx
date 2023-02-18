@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   LeftImg,
   LeftInputFile,
@@ -22,6 +22,8 @@ import { api } from '../../api/api';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../redux/user/userAction';
+import { lang } from '../../lang/lang';
+import { LanguageContext } from '../../context/LanguageContext';
 
 export const ProfileActive = () => {
   const dispatch = useDispatch();
@@ -80,6 +82,8 @@ export const ProfileActive = () => {
     userEdit(values);
   };
 
+  const { language, setLanguage } = useContext(LanguageContext);
+
   return (
     <div>
       <ProfileBox className='relative'>
@@ -92,7 +96,7 @@ export const ProfileActive = () => {
                 className='rounded-full'
                 width='175px'
               />
-              <p className='mt-3 text-red-500' >!!!Image is required!!!</p>
+              <p className='mt-3 text-red-500'>!!!Image is required!!!</p>
             </>
           ) : (
             <LeftName>
@@ -108,14 +112,24 @@ export const ProfileActive = () => {
           <LeftLabelFile htmlFor='InputProfile'></LeftLabelFile>
         </LeftProfileBox>
         <RightProfileBox>
-          <RightProfileBoxTitle className='dark:text-white' >My profile</RightProfileBoxTitle>
+          <RightProfileBoxTitle className='dark:text-white'>
+            {lang[language]?.ProfilePage?.ProfileEditPage?.ProfileEditTitle}
+          </RightProfileBoxTitle>
           <Formik
             initialValues={initialValues}
             onSubmit={handleSubmit}
             validationSchema={validationSchema}
           >
             <RightForm>
-              <RightLabelInput className='dark:text-white' htmlFor='firstName'>First Name</RightLabelInput>
+              <RightLabelInput
+                className='dark:text-white'
+                htmlFor='firstName'
+              >
+                {
+                  lang[language]?.ProfilePage?.ProfileEditPage
+                    ?.ProfileFirstNameInput
+                }
+              </RightLabelInput>
               <RightInputForm
                 placeholder='First Name'
                 id='firstName'
@@ -124,7 +138,15 @@ export const ProfileActive = () => {
               <p className='text-red-600 text-sm dark:text-white '>
                 <TextBottomInput name='first_name' />
               </p>
-              <RightLabelInput className='dark:text-white' htmlFor='Lastname'>Last Name</RightLabelInput>
+              <RightLabelInput
+                className='dark:text-white'
+                htmlFor='Lastname'
+              >
+                {
+                  lang[language]?.ProfilePage?.ProfileEditPage
+                    ?.ProfileLastNameInput
+                }
+              </RightLabelInput>
               <RightInputForm
                 placeholder='Last Name'
                 id='Lastname'
@@ -133,7 +155,15 @@ export const ProfileActive = () => {
               <p className='text-red-600 text-sm dark:text-white '>
                 <TextBottomInput name='last_name' />
               </p>
-              <RightLabelInput className='dark:text-white' htmlFor='Phone'>Phone</RightLabelInput>
+              <RightLabelInput
+                className='dark:text-white'
+                htmlFor='Phone'
+              >
+                {
+                  lang[language]?.ProfilePage?.ProfileEditPage
+                    ?.ProfilePhoneInput
+                }
+              </RightLabelInput>
               <RightInputForm
                 placeholder='Phone'
                 id='Phone'
@@ -142,7 +172,15 @@ export const ProfileActive = () => {
               <p className='text-red-600 text-sm dark:text-white '>
                 <TextBottomInput name='phone' />
               </p>
-              <SubmitBtn type='submit' className='dark:bg-white dark:text-black' >Save Changes</SubmitBtn>
+              <SubmitBtn
+                type='submit'
+                className='dark:bg-white dark:text-black'
+              >
+                {
+                  lang[language]?.ProfilePage?.ProfileEditPage
+                    ?.ProfileSaveBtn
+                }
+              </SubmitBtn>
             </RightForm>
           </Formik>
         </RightProfileBox>

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { LanguageContext } from '../../context/LanguageContext';
+import { lang } from '../../lang/lang';
 
 export const Header = () => {
   const [dropdown, setDropdown] = useState(false);
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+
+  const { language, setLanguage } = useContext(LanguageContext);
+
+  const userInfo = JSON.parse(localStorage.getItem('user'));
+
   return (
     <header>
       <nav>
@@ -24,7 +31,7 @@ export const Header = () => {
                 }
                 to='/home'
               >
-                Bosh Sahifa
+                {lang[language].HomePage?.header?.home}
               </NavLink>
             </li>
             <li className=''>
@@ -34,16 +41,40 @@ export const Header = () => {
                 }
                 to='/kitoblar'
               >
-                Kitoblar
+                {lang[language].HomePage?.header?.books}
               </NavLink>
             </li>
             <li
               onClick={() => setDropdown(!dropdown)}
-              className='cursor-pointer p-3 bg-orange-600 rounded-full text-white relative'
+              className='cursor-pointer p-3 rounded-full text-white relative'
             >
-              {user.first_name.at(0) + '.' + user.last_name.at(0)}
+              {userInfo.image != null ? (
+                <>
+                  <div
+                    onClick={() => setDropdown(!dropdown)}
+                    className='cursor-pointer  rounded-full  relative'
+                  >
+                    <img
+                      src={'http://localhost:5000/' + userInfo.image}
+                      alt=''
+                      className='rounded-full'
+                      width='49px'
+                      style={{ height: '49px' }}
+                    />
+                  </div>
+                </>
+              ) : (
+                <div
+                  onClick={() => setDropdown(!dropdown)}
+                  className='cursor-pointer bg-orange-500 p-3 rounded-full text-white relative'
+                >
+                  <span>
+                    {user.first_name.at(0) + '.' + user.last_name.at(0)}
+                  </span>
+                </div>
+              )}
               <span
-                className='absolute left-12 top-2  text-2xl text-black dark:text-gray-600
+                className='absolute left-16 top-4  text-2xl text-black dark:text-gray-500
               '
               >
                 ▼
@@ -55,7 +86,7 @@ export const Header = () => {
                       className='w-full block'
                       to='/profile'
                     >
-                      Profile
+                      {lang[language].HomePage?.header?.profile}
                     </Link>
                   </li>
                   <li className='py-2 pl-3 w-full  '>
@@ -63,7 +94,7 @@ export const Header = () => {
                       className='w-full block'
                       to='/addAuthor'
                     >
-                      Add author
+                      {lang[language].HomePage?.header?.addAuthor}
                     </Link>
                   </li>
                   <li className='py-2 pl-3 w-full  '>
@@ -71,7 +102,7 @@ export const Header = () => {
                       className='w-full block'
                       to='/addBook'
                     >
-                      Add book
+                      {lang[language].HomePage?.header?.addBook}
                     </Link>
                   </li>
                   <li className='py-2 pl-3 w-full  '>
@@ -80,10 +111,10 @@ export const Header = () => {
                       onClick={() => {
                         localStorage.removeItem('token');
                         localStorage.removeItem('user');
-                        location.replace('/Login')
+                        location.replace('/Login');
                       }}
                     >
-                      Log out
+                      {lang[language].HomePage?.header?.logOut}
                     </button>
                   </li>
                 </ul>

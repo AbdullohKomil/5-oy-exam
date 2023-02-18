@@ -11,21 +11,21 @@ export const lang = {
       },
       main: {
         slider: {
-          SliderTitle1: 'Temuriylar Davri',
-          SliderTitle2: 'Jadidar Davri',
-          SliderTitle3: 'Sovet Davri',
-          SliderTitle4: 'Mustaqillik Davri',
+          SliderTitle1: 'Temuriylar Davri Adabiyoti',
+          SliderTitle2: 'Jadidar Davri Adabiyoti',
+          SliderTitle3: 'Sovet Davri Adabiyoti',
+          SliderTitle4: 'Mustaqillik Davri Adabiyoti',
         },
         search: {
           searchTitle: 'Qidirish',
           searchInputPlaceholder: 'Adiblar, kitoblar, audiolar, maqolalar...',
-          searchBtn: 'izlash',
+          searchBtn: 'Izlash',
         },
         mainCategory: {
-          categoryTitle1: 'Temuriylar davri adabiyoti',
-          categoryTitle1: 'Jadidlat davri adabiyoti',
-          categoryTitle1: 'Sovet davri adabiyoti',
-          categoryTitle4: 'Mustaqillik davri adabiyoti',
+          categoryTitle1: 'Temuriylar davri',
+          categoryTitle2: 'Jadidlar adabiyoti',
+          categoryTitle3: 'Sovet davri',
+          categoryTitle4: 'Mustaqillik davri',
         },
       },
     },
@@ -40,6 +40,7 @@ export const lang = {
         ProfileFirstNameInput: 'Ism',
         ProfileLastNameInput: 'Familiya',
         ProfilePhoneInput: 'Telefon Raqam',
+        ProfileSaveBtn: 'Ozgarishlarni Saqlash',
       },
       ProfileSecurityPage: {
         ProfileSecurityTitle: "Parolingizni O'zgartiring Yoki Tiklang:",
@@ -115,6 +116,7 @@ export const lang = {
         ProfileFirstNameInput: 'First name',
         ProfileLastNameInput: 'Last name',
         ProfilePhoneInput: 'Phone',
+        ProfileSaveBtn: '',
       },
       ProfileSecurityPage: {
         ProfileSecurityTitle: 'Change Or Recover Your Password:',
@@ -190,6 +192,7 @@ export const lang = {
         ProfileFirstNameInput: 'Имя',
         ProfileLastNameInput: 'Фамилия',
         ProfilePhoneInput: 'Телефон',
+        ProfileSaveBtn: '',
       },
       ProfileSecurityPage: {
         ProfileSecurityTitle: 'Измените Или Восстановите Свой Пароль:',

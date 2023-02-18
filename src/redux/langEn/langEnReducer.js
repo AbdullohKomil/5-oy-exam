@@ -1,12 +1,12 @@
-import { SET_LANG } from "./langUzType";
+import { SET_LANG_EN } from "./langEnType";
 
 const initialState = {
   lang: '',
 };
 
-export const themeReducer = (state = initialState, action) => {
+export const langEnReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_LANG:
+    case SET_LANG_EN:
       return { ...state, lang: action.payload };
     default:
       return state;

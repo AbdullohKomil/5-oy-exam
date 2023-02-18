@@ -2,6 +2,10 @@ import React, { useContext, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { LanguageContext } from '../../context/LanguageContext';
 import { ThemeContext } from '../../context/ThemeContext';
+import { lang } from '../../lang/lang';
+import { setLangEn } from '../../redux/langEn/langEnAction';
+import { setLangRu } from '../../redux/langRu/langRuAction';
+import { setLangUz } from '../../redux/langUz/langUzAction';
 import { setTheme } from '../../redux/theme/themeAction';
 import {
   CheckboxInput,
@@ -41,24 +45,39 @@ export const Settings = () => {
   };
 
   const ChangeLanguage = (lang) => {
-    setLanguage(lang)
-    localStorage.setItem('language', lang)
+    setLanguage(lang);
+    localStorage.setItem('language', lang);
+    dispatch(setLangUz(lang));
+    dispatch(setLangEn(lang));
+    dispatch(setLangRu(lang));
   };
 
   return (
     <>
       <SettingsBox>
         <SettingsBoxInner>
-          <SettingsTitle className='dark:text-white'>Settings</SettingsTitle>
+          <SettingsTitle className='dark:text-white'>
+            {' '}
+            {
+              lang[language]?.ProfilePage?.ProfileSettingPage
+                ?.ProfileSettingTitle
+            }
+          </SettingsTitle>
           <LanguageSelectTopText className='dark:text-white'>
-            Language
+            {
+              lang[language]?.ProfilePage?.ProfileSettingPage
+                ?.ProfileSettingLang
+            }
           </LanguageSelectTopText>
           <LanguageSelect onChange={(evt) => ChangeLanguage(evt.target.value)}>
             <LanguageOption value='uz'>Ozbekcha</LanguageOption>
             <LanguageOption value='en'>English</LanguageOption>
             <LanguageOption value='ru'>Росисийский язык</LanguageOption>
           </LanguageSelect>
-          <p className='mb-2 dark:text-white'>Theme</p>
+          <p className='mb-2 dark:text-white'>
+            {' '}
+            {lang[language]?.ProfilePage?.ProfileSettingPage?.ProfileSetTheme}
+          </p>
           <CheckboxWrapper class='checkbox-wrapper-3'>
             <CheckboxInput
               onChange={handleChangeCheckbox}

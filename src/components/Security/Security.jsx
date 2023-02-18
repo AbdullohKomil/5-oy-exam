@@ -1,5 +1,5 @@
 import { ErrorMessage, Formik } from 'formik';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   SecurityBox,
   SecurityForm,
@@ -10,12 +10,17 @@ import {
 } from './Security.styles';
 import * as Yup from 'yup';
 import { api } from '../../api/api';
+import { toast } from 'react-toastify';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { LanguageContext } from '../../context/LanguageContext';
+import { lang } from '../../lang/lang';
 
 export const Security = () => {
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email('invalid email format!!')
-      .oneOf(['abdulloh@gmail.com'], 'Siz bu emaildasiz abdulloh@gmail.com')
       .required('Required email !!!'),
     currentPassword: Yup.string().required('required Current Password !!!'),
     newPassword: Yup.string()
@@ -32,23 +37,37 @@ export const Security = () => {
     newPassword: '',
   };
 
-  const [dataSecurity,setDataSecurity] = useState([])
+  const [dataSecurity, setDataSecurity] = useState([]);
+
+  const UserInfo = JSON.parse(localStorage.getItem('user'));
 
   const EditSecurity = async (values) => {
     const data = await api
       .userEditSecurity(values)
       .catch((err) => console.log(err));
-    console.log(values)
-  };
+    console.log(values);
+    console.log(data);
+    if (data?.data == 'updated') {
+      toast('Updated! Ozgartirildi!');
 
+      let newEmail = JSON.parse(localStorage.getItem('user'));
+      newEmail.email = values.email;
+      localStorage.setItem('user', JSON.stringify(newEmail));
+      navigate('/');
+    }
+  };
 
   const handleSubmit = (values) => {
-    EditSecurity(values)
+    EditSecurity(values);
   };
+
+  const { language, setLanguage } = useContext(LanguageContext);
 
   return (
     <SecurityBox>
-      <SecurityTitle className='dark:text-white' >Change Or Recover Your Password:</SecurityTitle>
+      <SecurityTitle className='dark:text-white'>
+        {lang[language]?.ProfilePage?.ProfileSecurityPage?.ProfileSecurityTitle}
+      </SecurityTitle>
       <Formik
         validationSchema={validationSchema}
         initialValues={initialValues}
@@ -59,7 +78,10 @@ export const Security = () => {
             className='block dark:text-white'
             htmlFor='emailSecurity'
           >
-            Email
+            {
+              lang[language]?.ProfilePage?.ProfileSecurityPage
+                ?.ProfileSecurityEmailInput
+            }
           </SecurityLabel>
           <SecurityInput
             type='email'
@@ -77,7 +99,10 @@ export const Security = () => {
             className='block dark:text-white'
             htmlFor='currentPassword'
           >
-            Current Password
+            {
+              lang[language]?.ProfilePage?.ProfileSecurityPage
+                ?.ProfileSecurityCurrentPassInput
+            }
           </SecurityLabel>
           <SecurityInput
             type='password'
@@ -95,7 +120,10 @@ export const Security = () => {
             className='block dark:text-white'
             htmlFor='newPassword'
           >
-            New Password
+            {
+              lang[language]?.ProfilePage?.ProfileSecurityPage
+                ?.ProfileSecurityNewPassInput
+            }
           </SecurityLabel>
           <SecurityInput
             type='password'
@@ -109,7 +137,10 @@ export const Security = () => {
               name='newPassword'
             />
           </p>
-          <SubmitButton type='submit'>Save Changes</SubmitButton>
+          <SubmitButton type='submit'>
+            {' '}
+            {lang[language]?.ProfilePage?.ProfileEditPage?.ProfileSaveBtn}
+          </SubmitButton>
         </SecurityForm>
       </Formik>
     </SecurityBox>

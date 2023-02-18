@@ -1,6 +1,6 @@
-import { SET_LANG } from './langUzType';
+import { SET_LANG_RU } from './langRuType';
 
-export const setTheme = () => {
+export const setLangRu = () => {
   const PayloadInfo = localStorage.getItem('language') || 'uz';
-  return { type: SET_LANG, payload: PayloadInfo };
+  return { type: SET_LANG_RU, payload: PayloadInfo };
 };

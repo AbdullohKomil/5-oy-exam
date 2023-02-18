@@ -16,6 +16,9 @@ import {
 import { Outlet } from 'react-router-dom';
 import { SearchAuthorContext } from '../../context/SearchAuthorContext';
 import { Header } from '../../components/Header/Header';
+import { LanguageContext } from '../../context/LanguageContext';
+
+import { lang } from '../../lang/lang';
 export const Home = () => {
   const { searchAuthor, setSearchAuthor } = useContext(SearchAuthorContext);
 
@@ -55,6 +58,8 @@ export const Home = () => {
     setSearchAuthor(inputValueSearch.current.value);
   };
 
+  const { language, setLanguage } = useContext(LanguageContext);
+
   return (
     <>
       <div>
@@ -66,7 +71,7 @@ export const Home = () => {
             <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
             <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
             <HeroTitle className='font-mono'>
-              Temuriylar davri adabiyoti
+              {lang[language]?.HomePage?.main?.slider?.SliderTitle1}
             </HeroTitle>
           </Hero>
           <Hero className=''>
@@ -75,7 +80,9 @@ export const Home = () => {
             <NavigationSpan className='bg-white'></NavigationSpan>
             <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
             <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
-            <HeroTitle className='font-mono'>Jadid davri adabiyoti</HeroTitle>
+            <HeroTitle className='font-mono'>
+              {lang[language]?.HomePage?.main?.slider?.SliderTitle2}
+            </HeroTitle>
           </Hero>
           <Hero className=''>
             {' '}
@@ -83,7 +90,9 @@ export const Home = () => {
             <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
             <NavigationSpan className='bg-white'></NavigationSpan>
             <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
-            <HeroTitle className='font-mono'>Sovet davri adabiyoti</HeroTitle>
+            <HeroTitle className='font-mono'>
+              {lang[language]?.HomePage?.main?.slider?.SliderTitle3}
+            </HeroTitle>
           </Hero>
           <Hero className=''>
             {' '}
@@ -92,7 +101,7 @@ export const Home = () => {
             <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
             <NavigationSpan className='bg-white'></NavigationSpan>
             <HeroTitle className='font-mono'>
-              Mustaqillik davri adabiyoti
+              {lang[language]?.HomePage?.main?.slider?.SliderTitle4}
             </HeroTitle>
           </Hero>
         </Slider>
@@ -102,14 +111,16 @@ export const Home = () => {
             <SearchInput
               className='dark:bg-gray-800'
               ref={inputValueSearch}
-              placeholder='Adiblar'
+              placeholder={
+                lang[language]?.HomePage?.main?.search?.searchInputPlaceholder
+              }
               type='text'
             />
             <SubmitSearchButton
               type='submit'
               className='font-sans dark:text-black'
             >
-              Izlash
+              {lang[language]?.HomePage?.main?.search?.searchBtn}
             </SubmitSearchButton>
             {/* <p>{searchAuthor ? '' : '!!!This user not found'}</p> */}
           </SearchForm>
@@ -156,7 +167,7 @@ export const Home = () => {
             }
             to='temuriylarDavriAuthor'
           >
-            Temuriylar davri
+            {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle1}
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -164,7 +175,7 @@ export const Home = () => {
             }
             to='jadidAdabiyotiAuthor'
           >
-            Jadid adabiyoti
+            {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle2}
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -172,7 +183,7 @@ export const Home = () => {
             }
             to='sovetDavriAuthor'
           >
-            Sovet davri
+            {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle3}
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -180,7 +191,7 @@ export const Home = () => {
             }
             to='mustaqillikDavriAuthor'
           >
-            Mustaqillik davri
+            {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle4}
           </NavLink>
         </div>
         <Outlet />
