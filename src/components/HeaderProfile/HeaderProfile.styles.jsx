@@ -12,7 +12,6 @@ export const HeaderProfileBox = styled.div`
 
 export const LinksHeader = styled(NavLink)`
   border-radius: 4px 4px 0px 0px;
-  background: #f3f6f9;
   width: 33%;
   padding-top: 30px;
   padding-bottom: 30px;

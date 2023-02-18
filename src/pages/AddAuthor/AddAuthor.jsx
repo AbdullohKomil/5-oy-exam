@@ -1,10 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import * as Yup from 'yup';
 import { api } from '../../api/api';
+import { LanguageContext } from '../../context/LanguageContext';
+import { lang } from '../../lang/lang';
 
 import { FileIconSpan, LabelFile } from './AddAuthor.styles';
 
@@ -40,19 +42,17 @@ export const AddAuthor = () => {
     bio: '',
   };
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
   const createAuthorRequest = async (formData) => {
-    const data = await api
-      .createAuthor(formData)
-      .catch((err) => setError(err));
+    const data = await api.createAuthor(formData).catch((err) => setError(err));
 
+    console.log(data);
 
     if (error) {
       toast(error?.response?.data?.message);
-      navigate('/')
     } else {
-      
+      navigate('/');
     }
   };
 
@@ -78,6 +78,8 @@ export const AddAuthor = () => {
     createAuthorRequest(formData);
   };
 
+  const { language, setLanguage } = useContext(LanguageContext);
+
   return (
     <div className='flex'>
       <div className='w-2/4 text-center h-screen bg-gray-200 dark:bg-black p-32'>
@@ -98,7 +100,10 @@ export const AddAuthor = () => {
         </div>
       </div>
       <div className='w-2/4 flex flex-col justify-center dark:bg-black items-center h-screen'>
-        <h2 className='dark:text-white text-3xl	font-bold'>Add author</h2>
+        <h2 className='dark:text-white text-3xl	font-bold'>
+          {' '}
+          {lang[language]?.AddAuthorPage?.AddAuthorTitle}
+        </h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -109,7 +114,7 @@ export const AddAuthor = () => {
               type='text'
               placeholder='First name'
               name='first_name'
-              className='focus:outline-none border py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
+              className='focus:outline-none border dark:text-white py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
             />
             <span className='text-red-600'>
               <ErrorMessage name='first_name' />
@@ -119,7 +124,7 @@ export const AddAuthor = () => {
               type='text'
               placeholder='Last name'
               name='last_name'
-              className='focus:outline-none border py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
+              className='focus:outline-none border dark:text-white py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
             />
             <span className='text-red-600'>
               <ErrorMessage name='last_name' />
@@ -128,7 +133,7 @@ export const AddAuthor = () => {
               type='text'
               placeholder='Date of birth'
               name='date_of_birth'
-              className='focus:outline-none border py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
+              className='focus:outline-none border dark:text-white py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
             />
             <span className='text-red-600'>
               <ErrorMessage name='date_of_birth' />
@@ -137,7 +142,7 @@ export const AddAuthor = () => {
               type='text'
               name='date_of_death'
               placeholder='Date of death'
-              className='focus:outline-none border py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
+              className='focus:outline-none border dark:text-white py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
             />
             <span className='text-red-600'>
               <ErrorMessage name='date_of_death' />
@@ -146,14 +151,14 @@ export const AddAuthor = () => {
               type='text'
               placeholder='Country'
               name='country'
-              className='focus:outline-none border py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
+              className='focus:outline-none border dark:text-white py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
             />
             <span className='text-red-600'>
               <ErrorMessage name='country' />
             </span>
             <select
               ref={selectRef}
-              className='focus:outline-none border py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black dark:text-white'
+              className='focus:outline-none border dark:text-white py-3 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black dark:text-white'
               defaultValue='1'
             >
               <option value='1'>Temuriylar davri</option>
@@ -166,7 +171,7 @@ export const AddAuthor = () => {
               type='text'
               placeholder='Bio'
               name='bio'
-              className='focus:outline-none border py-3 pb-12 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
+              className='focus:outline-none border dark:text-white py-3 pb-12 pr-60 mt-3 mb-4 pl-5 rounded-xl dark:bg-black'
             />
             <span className='text-red-600'>
               <ErrorMessage name='bio' />

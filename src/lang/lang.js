@@ -78,12 +78,10 @@ export const lang = {
       header: {
         home: 'Home Page',
         books: 'Books',
-        dropDown: {
-          profile: 'Profile',
-          addAuthor: 'Add author',
-          addBook: 'Add book',
-          logOut: 'Log out',
-        },
+        profile: 'Profile',
+        addAuthor: 'Add author',
+        addBook: 'Add book',
+        logOut: 'Log out',
       },
       main: {
         slider: {
@@ -99,8 +97,8 @@ export const lang = {
         },
         mainCategory: {
           categoryTitle1: 'Temuriylar period',
-          categoryTitle1: 'Jadidlat period',
-          categoryTitle1: 'Sovet period',
+          categoryTitle2: 'Jadidlat period',
+          categoryTitle3: 'Sovet period',
           categoryTitle4: 'Mustaqillik period',
         },
       },
@@ -116,7 +114,7 @@ export const lang = {
         ProfileFirstNameInput: 'First name',
         ProfileLastNameInput: 'Last name',
         ProfilePhoneInput: 'Phone',
-        ProfileSaveBtn: '',
+        ProfileSaveBtn: 'Save changes',
       },
       ProfileSecurityPage: {
         ProfileSecurityTitle: 'Change Or Recover Your Password:',
@@ -154,12 +152,10 @@ export const lang = {
       header: {
         home: 'Главная Страница',
         books: 'Книги',
-        dropDown: {
-          profile: 'Профиль',
-          addAuthor: 'Добавить автор',
-          addBook: 'Добавить книгу',
-          logOut: 'Выйти',
-        },
+        profile: 'Профиль',
+        addAuthor: 'Добавить автор',
+        addBook: 'Добавить книгу',
+        logOut: 'Выйти',
       },
       main: {
         slider: {
@@ -175,8 +171,8 @@ export const lang = {
         },
         mainCategory: {
           categoryTitle1: 'Период Тимуридов',
-          categoryTitle1: 'Период Джадидов',
-          categoryTitle1: 'Советский период',
+          categoryTitle2: 'Период Джадидов',
+          categoryTitle3: 'Советский период',
           categoryTitle4: 'Период независимости',
         },
       },
@@ -192,7 +188,7 @@ export const lang = {
         ProfileFirstNameInput: 'Имя',
         ProfileLastNameInput: 'Фамилия',
         ProfilePhoneInput: 'Телефон',
-        ProfileSaveBtn: '',
+        ProfileSaveBtn: 'Сохранить изменения',
       },
       ProfileSecurityPage: {
         ProfileSecurityTitle: 'Измените Или Восстановите Свой Пароль:',

@@ -47,7 +47,7 @@ export const SingleAuthorPage = () => {
             <h2 className='text-4xl mt-9 text-amber-200'>
               {data.first_name + ' ' + data.last_name}
             </h2>
-            <p className='mt-1 h-72 w-4/5'>{data.bio}</p>
+            <p className='mt-1 h-72 w-4/5 dark:text-white'>{data.bio}</p>
             <div className='date flex'>
               <div className='alive-date '>
                 <span className='text-gray-400 '>Tavallud sanasi</span>

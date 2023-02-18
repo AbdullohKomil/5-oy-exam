@@ -57,7 +57,6 @@ export const Settings = () => {
       <SettingsBox>
         <SettingsBoxInner>
           <SettingsTitle className='dark:text-white'>
-            {' '}
             {
               lang[language]?.ProfilePage?.ProfileSettingPage
                 ?.ProfileSettingTitle
@@ -69,16 +68,26 @@ export const Settings = () => {
                 ?.ProfileSettingLang
             }
           </LanguageSelectTopText>
-          <LanguageSelect onChange={(evt) => ChangeLanguage(evt.target.value)}>
+          <LanguageSelect
+            defaultValue={localStorage.getItem('language')}
+            onChange={(evt) => ChangeLanguage(evt.target.value)}
+          >
+            <LanguageOption
+              value='dis'
+              selected
+              disabled
+            >
+              Language
+            </LanguageOption>
             <LanguageOption value='uz'>Ozbekcha</LanguageOption>
             <LanguageOption value='en'>English</LanguageOption>
-            <LanguageOption value='ru'>Росисийский язык</LanguageOption>
+            <LanguageOption value='ru'>Росисийский</LanguageOption>
           </LanguageSelect>
           <p className='mb-2 dark:text-white'>
             {' '}
             {lang[language]?.ProfilePage?.ProfileSettingPage?.ProfileSetTheme}
           </p>
-          <CheckboxWrapper class='checkbox-wrapper-3'>
+          <CheckboxWrapper className='checkbox-wrapper-3'>
             <CheckboxInput
               onChange={handleChangeCheckbox}
               type='checkbox'
@@ -87,9 +96,8 @@ export const Settings = () => {
               ref={CheckboxRef}
             />
             <CheckboxLabel
-              for='cbx-3'
-              ё
-              class='toggle'
+              htmlFor='cbx-3'
+              className='toggle'
             >
               <span></span>
             </CheckboxLabel>

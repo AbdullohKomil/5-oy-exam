@@ -109,7 +109,7 @@ export const Home = () => {
           <ShadowBoxTitle>Qidirish</ShadowBoxTitle>
           <SearchForm onSubmit={handleSearchSubmit}>
             <SearchInput
-              className='dark:bg-gray-800'
+              className='dark:bg-gray-800 dark:text-white'
               ref={inputValueSearch}
               placeholder={
                 lang[language]?.HomePage?.main?.search?.searchInputPlaceholder

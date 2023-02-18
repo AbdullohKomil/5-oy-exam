@@ -19,7 +19,7 @@ export const NavigationSpan = styled.span`
   border-radius: 10px;
   width: 55px;
   height: 3px;
-  top: 260px;
+  top: 250px;
   &:nth-child(1) {
     left: 110px;
   }
@@ -50,7 +50,7 @@ export const ShadowFormBox = styled.div`
   position: absolute;
   background: #ffffff;
   box-shadow: 0px 4px 77px rgba(0, 0, 0, 0.25);
-  top: 370px;
+  top: 390px;
   left: calc(50% - 530px);
   border-radius: 15px;
 `;

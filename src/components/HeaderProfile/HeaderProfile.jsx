@@ -13,16 +13,37 @@ export const HeaderProfile = () => {
   return (
     <div>
       <HeaderProfileBox>
-        <LinksHeader to='/profile/profileActive'>
-          <LinksHeaderNumber>1</LinksHeaderNumber>
+        <LinksHeader
+          className={({ isActive }) =>
+            isActive
+              ? 'dark:bg-profileHeader bg-profileHeader'
+              : 'dark:bg-profileHeader'
+          }
+          to='/profile/profileActive'
+        >
+          <LinksHeaderNumber className='dark:bg-transparent dark:border dark:border-gray-500 dark:text-gray-500' >1</LinksHeaderNumber>
           {lang[language]?.ProfilePage?.ProfileHeader?.profileLink}
         </LinksHeader>
-        <LinksHeader to='security'>
-          <LinksHeaderNumber>2</LinksHeaderNumber>
+        <LinksHeader
+          className={({ isActive }) =>
+            isActive
+              ? 'dark:bg-profileHeader bg-profileHeader'
+              : 'dark:bg-profileHeader'
+          }
+          to='security'
+        >
+          <LinksHeaderNumber className='dark:bg-transparent dark:border dark:border-gray-500 dark:text-gray-500' >2</LinksHeaderNumber>
           {lang[language]?.ProfilePage?.ProfileHeader?.securityLink}
         </LinksHeader>
-        <LinksHeader to='settings'>
-          <LinksHeaderNumber>3</LinksHeaderNumber>
+        <LinksHeader
+          className={({ isActive }) =>
+            isActive
+              ? 'dark:bg-profileHeader bg-profileHeader'
+              : 'dark:bg-profileHeader'
+          }
+          to='settings'
+        >
+          <LinksHeaderNumber className='dark:bg-transparent dark:border dark:border-gray-500 dark:text-gray-500' >3</LinksHeaderNumber>
           {lang[language]?.ProfilePage?.ProfileHeader?.settingsLink}
         </LinksHeader>
       </HeaderProfileBox>

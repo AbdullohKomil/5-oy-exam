@@ -21,6 +21,7 @@ export const Security = () => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .email('invalid email format!!')
+      .notOneOf([JSON.parse(localStorage.getItem('user')).email], 'Siz boshqa email, kiritishingiz kerak')
       .required('Required email !!!'),
     currentPassword: Yup.string().required('required Current Password !!!'),
     newPassword: Yup.string()

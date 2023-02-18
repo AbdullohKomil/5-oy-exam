@@ -95,6 +95,7 @@ export const ProfileActive = () => {
                 alt=''
                 className='rounded-full'
                 width='175px'
+               style={{height: '175px'}} 
               />
               <p className='mt-3 text-red-500'>!!!Image is required!!!</p>
             </>
