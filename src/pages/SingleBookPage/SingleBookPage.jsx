@@ -9,8 +9,8 @@ export const SingleBookPage = () => {
   const [data, setData] = useState({});
   const [bookData, setBookData] = useState([]);
   const GetOneBook = async () => {
-    const data = await api.SingleBook(id).catch((err) => console.log(err));
-    setData(data.data);
+    const { data } = await api.SingleBook(id).catch((err) => console.log(err));
+    setData(data);
   };
 
   const getAuthorBooks = async () => {
@@ -23,8 +23,11 @@ export const SingleBookPage = () => {
 
   useEffect(() => {
     GetOneBook();
-    getAuthorBooks();
   }, []);
+
+  useEffect(() => {
+    getAuthorBooks();
+  }, [data]);
   return (
     <>
       <Header />
@@ -70,28 +73,33 @@ export const SingleBookPage = () => {
             Barchasini ko’rish
           </Link>
         </div>
-        <ul>
+        <ul
+          style={{ overflow: 'auto', width: '100%', 'max-width': '100000px' }}
+          className='flex'
+        >
           {bookData
             ? bookData.map((el) => (
-                <li
-                  key={el.id}
-                  className=' rounded-3xl w-30 pb-4 dark:bg-transparent'
-                >
-                  <Link to={'/singleBookPage/' + el.id}>
-                    <img
-                      src={`http://localhost:5000/${el.image}`}
-                      alt='...'
-                      width='190px'
-                      className='h-72 object-cover bg-white mx-auto rounded-3xl'
-                    />
-                    <div>
-                      <h4 className='text-2xl mt-3 mb-2 dark:text-orange-200'>
-                        {el.title}
-                      </h4>
-                      <p className=' dark:text-gray-400	'>Alisher Navoiy</p>
-                    </div>
-                  </Link>
-                </li>
+                <>
+                  <li
+                    key={el.id}
+                    className=' rounded-3xl w-40 pb-4 dark:bg-transparent'
+                  >
+                    <Link to={'/singleBookPage/' + el.id}>
+                      <img
+                        src={`http://localhost:5000/${el.image}`}
+                        alt='...'
+                        width='190px'
+                        className='h-72 object-cover bg-white mx-auto rounded-3xl'
+                      />
+                      <div>
+                        <h4 className='text-2xl mt-3 mb-2 dark:text-orange-200'>
+                          {el.title}
+                        </h4>
+                        <p className=' dark:text-gray-400	'>Alisher Navoiy</p>
+                      </div>
+                    </Link>
+                  </li>
+                </>
               ))
             : ''}
         </ul>
