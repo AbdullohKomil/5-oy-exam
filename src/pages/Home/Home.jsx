@@ -62,7 +62,7 @@ export const Home = () => {
 
   return (
     <>
-      <div>
+      <div className='pb-9' >
         <Header />
         <Slider {...settings}>
           <Hero className=''>
@@ -118,11 +118,10 @@ export const Home = () => {
             />
             <SubmitSearchButton
               type='submit'
-              className='font-sans dark:text-black'
+              className='font-sans dark:text-black '
             >
               {lang[language]?.HomePage?.main?.search?.searchBtn}
             </SubmitSearchButton>
-            {/* <p>{searchAuthor ? '' : '!!!This user not found'}</p> */}
           </SearchForm>
         </ShadowFormBox>
 

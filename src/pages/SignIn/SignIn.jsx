@@ -9,6 +9,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { setToken } from '../../redux/token/tokenAction';
 import { setUser } from '../../redux/user/userAction';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 export const SignIn = () => {
   const validationSchema = Yup.object({
@@ -29,8 +30,13 @@ export const SignIn = () => {
 
   const dispatch = useDispatch();
 
+  const [err, setErr] = useState('');
+
   const userLogin = async (values) => {
-    const data = await api.userLogin(values).catch((err) => console.log(err));
+    const data = await api.userLogin(values).catch((err) => {
+      setErr(err.response.data.message);
+      console.log(err);
+    });
 
     console.log(data);
 
@@ -40,6 +46,11 @@ export const SignIn = () => {
 
     console.log(user);
 
+    console.log(err);
+
+    if (err != '') {
+      toast.error(err);
+    }
     if (data.status === 201) {
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('user', JSON.stringify(user.data));

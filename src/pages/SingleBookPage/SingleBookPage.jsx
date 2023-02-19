@@ -52,7 +52,7 @@ export const SingleBookPage = () => {
           </p>
           <p className='flex justify-between mt-3'>
             <span className='text-gray-400'>Kitob narxi:</span>{' '}
-            <span className='dark:text-white'>{data.price}</span>
+            <span className='dark:text-white'>${data.price}</span>
           </p>
           <div className='mt-10 flex items-center '>
             <span className='text-orange-200'>To’liq ma’lumot </span>{' '}
@@ -75,7 +75,7 @@ export const SingleBookPage = () => {
         </div>
         <ul
           style={{ overflow: 'auto', width: '100%', 'max-width': '100000px' }}
-          className='flex'
+          className='flex gap-9'
         >
           {bookData
             ? bookData.map((el) => (

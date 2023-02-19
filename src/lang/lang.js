@@ -85,10 +85,10 @@ export const lang = {
       },
       main: {
         slider: {
-          SliderTitle1: 'Literature of the Temuriylar period',
-          SliderTitle2: 'Literature of the Jadidar period',
-          SliderTitle3: 'Literature of the Sovet period',
-          SliderTitle4: 'Literature of the Mustaqillik period',
+          SliderTitle1: 'Literature of the Temuriylar',
+          SliderTitle2: 'Literature of the Jadidar',
+          SliderTitle3: 'Literature of the Sovet',
+          SliderTitle4: 'Literature of the Mustaqillik',
         },
         search: {
           searchTitle: 'Search',

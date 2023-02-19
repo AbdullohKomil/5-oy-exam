@@ -9,6 +9,8 @@ module.exports = {
         bgSliderSpan: '#ffffff99',
         profileHeaderActive: '#2D2D2D',
         profileHeader: '#f3f6f9',
+        cardBg: '#1E1E1E',
+        cardBgLight:'#F5F5F5'
       },
     },
   },

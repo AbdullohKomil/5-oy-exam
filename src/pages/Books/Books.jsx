@@ -54,36 +54,36 @@ export const Books = () => {
       <Header />
       <Slider {...settings}>
         <Hero className=''>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
+          <NavigationSpan className='bg-white'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <HeroTitle className='font-mono'>
             Temuriylar davri adabiyoti
           </HeroTitle>
         </Hero>
         <Hero className=''>
           {' '}
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-white'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <HeroTitle className='font-mono'>Jadid davri adabiyoti</HeroTitle>
         </Hero>
         <Hero className=''>
           {' '}
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-white'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <HeroTitle className='font-mono'>Sovet davri adabiyoti</HeroTitle>
         </Hero>
         <Hero className=''>
           {' '}
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
-          <NavigationSpan></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
+          <NavigationSpan className='bg-white'></NavigationSpan>
           <HeroTitle className='font-mono'>
             Mustaqillik davri adabiyoti
           </HeroTitle>
@@ -94,7 +94,7 @@ export const Books = () => {
         <SearchForm onSubmit={handleSearchSubmit}>
           <SearchInput
             className='dark:bg-gray-800 dark:text-white'
-            placeholder='Adiblar'
+            placeholder='Adiblar, kitoblar, audiolar, maqolalar...'
             type='text'
             ref={SearchInputRef}
           />

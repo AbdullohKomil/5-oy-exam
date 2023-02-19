@@ -18,7 +18,9 @@ export const AddBook = () => {
     title: Yup.string()
       .min(2, 'min length title 2 words')
       .required('Required Title'),
-    page: Yup.number().required('Required Pages'),
+    page: Yup.number()
+      .typeError('please enter the number')
+      .required('Required Pages'),
     year: Yup.number('please enter the number')
       .typeError('please enter the number')
       .max(2023, 'please enter right Year')
@@ -170,31 +172,36 @@ export const AddBook = () => {
             </span>
             <select
               ref={GenreSelectRef}
-              className='focus:outline-none dark:text-white border py-3 pr-60 mt-3 pl-5 rounded-xl dark:bg-black dark:text-white'
+              className='focus:outline-none border py-3 pr-60 mt-3 pl-5 rounded-xl dark:bg-black dark:text-white'
               defaultValue='dis'
               onChange={changedGenre}
             >
-              <option value='dis' selected disabled >Genre</option>
+              <option
+                value='dis'
+                selected
+                disabled
+              >
+                Genre
+              </option>
               <option value='1'>Temuriylar davri</option>
               <option value='2'>Jadid adabiyoti</option>
               <option value='3'>Sovet davri</option>
               <option value='4'>Mustaqillik davri</option>
             </select>
-            <select
-              ref={selectRef}
-              className='focus:outline-none dark:text-white border py-3 pr-60 mt-3 pl-5 rounded-xl dark:bg-black dark:text-white'
-            >
-              {authorGetOptionData
-                ? authorGetOptionData.map((el) => {
-                    console.log(el);
-                    return (
-                      <option value={el.id}>
-                        {el.first_name + ' ' + el.last_name}
-                      </option>
-                    );
-                  })
-                : ''}
-            </select>{' '}
+            {authorGetOptionData.length ? (
+              <select
+                ref={selectRef}
+                className='focus:outline-none border py-3 pr-60 mt-3 pl-5 rounded-xl dark:bg-black dark:text-white'
+              >
+                {authorGetOptionData.map((el) => (
+                  <option value={el.id}>
+                    {el.first_name + ' ' + el.last_name}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              ''
+            )}
             <Field
               type='text'
               placeholder='description'

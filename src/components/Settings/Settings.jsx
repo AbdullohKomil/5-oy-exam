@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { LanguageContext } from '../../context/LanguageContext';
 import { ThemeContext } from '../../context/ThemeContext';
 import { lang } from '../../lang/lang';
@@ -7,6 +8,7 @@ import { setLangEn } from '../../redux/langEn/langEnAction';
 import { setLangRu } from '../../redux/langRu/langRuAction';
 import { setLangUz } from '../../redux/langUz/langUzAction';
 import { setTheme } from '../../redux/theme/themeAction';
+import { SubmitBtn } from '../ProfileActive/ProfileActive.styles';
 import {
   CheckboxInput,
   CheckboxLabel,
@@ -34,6 +36,8 @@ export const Settings = () => {
   let isChecked = localStorage.getItem('theme') != '';
 
   const [defChecked, setDefChecked] = useState(isChecked);
+
+  const navigate = useNavigate()
 
   const handleChangeCheckbox = () => {
     if (CheckboxRef.current.checked == true) {
@@ -101,6 +105,13 @@ export const Settings = () => {
             >
               <span></span>
             </CheckboxLabel>
+            <SubmitBtn
+              type='submit'
+              className='dark:bg-white dark:text-black'
+              onClick={() => navigate('/')}
+            >
+              {lang[language]?.ProfilePage?.ProfileEditPage?.ProfileSaveBtn}
+            </SubmitBtn>
           </CheckboxWrapper>
         </SettingsBoxInner>
       </SettingsBox>

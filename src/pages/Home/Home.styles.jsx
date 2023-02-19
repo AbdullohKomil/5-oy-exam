@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import HeroBg from '../../assets/images/HeroBg.svg';
+import searchIcon from '../../assets/images/SearchIcon.svg';
 
 export const Hero = styled.div`
   background-image: url(${HeroBg});
@@ -86,4 +87,15 @@ export const SubmitSearchButton = styled.button`
   background: #c9ac8c;
   border-radius: 15px;
   color: white;
+
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    background-image: url(${searchIcon});
+    left: 42.5px;
+  }
 `;

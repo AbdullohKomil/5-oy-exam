@@ -4,6 +4,9 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { LanguageContext } from '../../context/LanguageContext';
 import { lang } from '../../lang/lang';
 
+import logo from '../../assets/images/logo.svg';
+import arrowDown from '../../assets/images/arrowdown.svg';
+
 export const Header = () => {
   const [dropdown, setDropdown] = useState(false);
   const user = useSelector((state) => state.user.user);
@@ -21,9 +24,12 @@ export const Header = () => {
             to='/'
             className='text-orange-300 text-2xl	'
           >
-            Badiiyat
+            <img
+              src={logo}
+              alt='logo'
+            />
           </NavLink>
-          <ul className='list-none flex justify-between w-56 items-center'>
+          <ul className='list-none flex justify-between w-64 items-center'>
             <li className=''>
               <NavLink
                 className={({ isActive }) =>
@@ -74,13 +80,22 @@ export const Header = () => {
                 </div>
               )}
               <span
-                className='absolute left-16 top-4  text-2xl text-black dark:text-gray-500
+                className='absolute left-16 top-9   text-2xl text-black dark:text-gray-500
               '
               >
-                ▼
+                <img
+                  src={arrowDown}
+                  alt=''
+                />
               </span>
-              <div className='absolute z-10 text-black rounded-lg right-1 top-14  bg-zinc-200	'>
-                <ul className={dropdown ? 'w-36' : 'hidden'}>
+              <div className='absolute z-10 text-black rounded-lg right-1 top-16 '>
+                <ul
+                  className={
+                    dropdown
+                      ? 'w-36 dark:bg-black dark:text-orange-300 rounded-xl bg-zinc-300'
+                      : 'hidden'
+                  }
+                >
                   <li className='py-2 pl-3 w-full  '>
                     <Link
                       className='w-full block'
@@ -109,9 +124,8 @@ export const Header = () => {
                     <button
                       className='w-full block text-left'
                       onClick={() => {
-                        localStorage.removeItem('token');
-                        localStorage.removeItem('user');
-                        location.replace('/Login');
+                        localStorage.clear();
+                        location.replace('/login')
                       }}
                     >
                       {lang[language].HomePage?.header?.logOut}

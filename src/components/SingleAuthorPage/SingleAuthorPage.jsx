@@ -36,26 +36,28 @@ export const SingleAuthorPage = () => {
       <Header />
       <div>
         <div className='flex flex-wrap'>
-          <div className='w-2/5 left-img'>
+          <div className='w-2/5 left-img mr-16'>
             <img
               src={'http://localhost:5000/' + data.image}
               alt=''
               width='505px'
+              style={{height :'505px'}}
             />
           </div>
-          <div className='right-info w-3/5'>
+          <div className='right-info w-2/4'>
             <h2 className='text-4xl mt-9 text-amber-200'>
               {data.first_name + ' ' + data.last_name}
             </h2>
-            <p className='mt-1 h-72 w-4/5 dark:text-white'>{data.bio}</p>
-            <div className='date flex'>
+            <p className='mt-1 h-72  dark:text-white'>{data.bio}</p>
+            <div className='date flex justify-between w-80'>
               <div className='alive-date '>
                 <span className='text-gray-400 '>Tavallud sanasi</span>
                 <p className='text-4xl text-orange-200'>
-                  {data.date_of_birth + ' ' + '-'}
+                  {data.date_of_birth + ' '}
                 </p>
                 <span className='text-gray-400'>{data.country}</span>
               </div>
+              <span className='text-4xl text-orange-200 mt-2' >__</span>
               <div className='death-date ml-3 '>
                 <span className='text-gray-400 '>Tavallud sanasi</span>
                 <p className='text-4xl text-orange-200'>{data.date_of_death}</p>

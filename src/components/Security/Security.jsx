@@ -21,7 +21,10 @@ export const Security = () => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .email('invalid email format!!')
-      .notOneOf([JSON.parse(localStorage.getItem('user')).email], 'Siz boshqa email, kiritishingiz kerak')
+      .notOneOf(
+        [JSON.parse(localStorage.getItem('user')).email],
+        'Siz boshqa email, kiritishingiz kerak'
+      )
       .required('Required email !!!'),
     currentPassword: Yup.string().required('required Current Password !!!'),
     newPassword: Yup.string()
@@ -39,15 +42,17 @@ export const Security = () => {
   };
 
   const [dataSecurity, setDataSecurity] = useState([]);
+  const [err, setErr] = useState('');
 
   const UserInfo = JSON.parse(localStorage.getItem('user'));
 
   const EditSecurity = async (values) => {
     const data = await api
       .userEditSecurity(values)
-      .catch((err) => console.log(err));
+      .catch((err) => setErr(err.response?.data?.message));
     console.log(values);
     console.log(data);
+
     if (data?.data == 'updated') {
       toast('Updated! Ozgartirildi!');
 
@@ -55,6 +60,9 @@ export const Security = () => {
       newEmail.email = values.email;
       localStorage.setItem('user', JSON.stringify(newEmail));
       navigate('/');
+    } 
+    if (err) {
+      toast.error(err)
     }
   };
 

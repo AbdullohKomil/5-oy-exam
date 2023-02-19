@@ -13,7 +13,7 @@ export const TemuriylarDavriBook = () => {
   }, [setDataBook]);
   return (
     <div>
-      <ul className='list-none flex-wrap flex gap-9 mt-9'>
+      <ul className='list-none flex-wrap justify-center  flex gap-9 mt-9'>
         {dataBook.length
           ? dataBook.map((el) => {
               return (

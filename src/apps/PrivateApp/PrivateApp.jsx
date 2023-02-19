@@ -21,7 +21,7 @@ export const PrivateApp = () => {
   return (
     <>
       <div className='dark:bg-black'>
-        <div className=' container h-full mx-auto'> 
+        <div className=' container h-full mx-auto '> 
         <Routes>
           <Route
             path='/'

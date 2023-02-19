@@ -22,7 +22,7 @@ export const FileIconSpan = styled.span`
   background-image: url(${FileIcon});
   width: 62px;
   height: 62px;
-  left: 220px;
   background-position: center;
+  left: calc(50% - 32px);
   top: 160px;
 `;
