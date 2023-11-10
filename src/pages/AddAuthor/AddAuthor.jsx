@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useContext, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import * as Yup from 'yup';
@@ -8,7 +8,7 @@ import { api } from '../../api/api';
 import { LanguageContext } from '../../context/LanguageContext';
 import { lang } from '../../lang/lang';
 
-import { FileIconSpan, LabelFile } from './AddAuthor.styles';
+import { AddAuthorRight, FileIconSpan, LabelFile } from './AddAuthor.styles';
 
 export const AddAuthor = () => {
   const filesRef = useRef();
@@ -47,11 +47,10 @@ export const AddAuthor = () => {
   const createAuthorRequest = async (formData) => {
     const data = await api.createAuthor(formData).catch((err) => setError(err));
 
-    console.log(data);
-
     if (error) {
       toast(error?.response?.data?.message);
     } else {
+      toast.success('Author qoshildi');
       navigate('/');
     }
   };
@@ -80,6 +79,22 @@ export const AddAuthor = () => {
 
   const { language, setLanguage } = useContext(LanguageContext);
 
+  const [imgNames, setImgNames] = useState(
+    'Click or drag file to this area to upload'
+  );
+
+  const handleFiles = (e) => {
+    const files = e.target.files;
+    setImgNames([]);
+    if (files.length == 0) {
+      setImgNames('Click or drag file to this area to upload');
+      return toast.error('Iltimos rasmni tanlang');
+    }
+
+    setImgNames((prev) => [
+      ...Array.from(files).map((file) => file.name + ' '),
+    ]);
+  };
   return (
     <div className='flex'>
       <div className='w-2/4 text-center h-screen bg-gray-200 dark:bg-black p-32'>
@@ -88,6 +103,7 @@ export const AddAuthor = () => {
           className='hidden'
           id='file_upload'
           ref={filesRef}
+          onChange={handleFiles}
         />
         <div className='relative'>
           <FileIconSpan></FileIconSpan>
@@ -95,12 +111,12 @@ export const AddAuthor = () => {
             htmlFor='file_upload'
             className='dark:text-neutral-600'
           >
-            Click or drag file to this area <br /> to upload
+            {imgNames}
           </LabelFile>
         </div>
       </div>
-      <div className='w-2/4 flex flex-col justify-center dark:bg-black items-center h-screen'>
-        <h2 className='dark:text-white text-3xl	font-bold'>
+      <AddAuthorRight className='w-2/4 flex flex-col justify-center fixed right-0 overflow-x-auto  dark:bg-black items-center'>
+        <h2 className='dark:text-white text-3xl	font-bold pt-32'>
           {' '}
           {lang[language]?.AddAuthorPage?.AddAuthorTitle}
         </h2>
@@ -178,13 +194,14 @@ export const AddAuthor = () => {
             </span>
             <button
               type='submit'
-              className='px-48 dark:bg-white dark:text-black block mx-auto bg-slate-900 text-white py-3 rounded-3xl mt-10'
+              className='px-48 dark:bg-white mb-3 dark:text-black block mx-auto bg-slate-900 text-white py-3 rounded-3xl mt-10'
             >
               Create
             </button>
+            <Link to='/' className='mb-2 font-sans text-center font-bold'>Home</Link>
           </Form>
         </Formik>
-      </div>
+      </AddAuthorRight>
     </div>
   );
 };

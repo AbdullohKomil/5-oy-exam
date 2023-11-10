@@ -33,7 +33,7 @@ export const Header = () => {
             <li className=''>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? 'text-black dark:text-white' : 'text-gray-300'
+                  isActive ? ' dark:text-white text-black' : 'text-gray-300'
                 }
                 to='/home'
               >
@@ -125,7 +125,7 @@ export const Header = () => {
                       className='w-full block text-left'
                       onClick={() => {
                         localStorage.clear();
-                        location.replace('/login')
+                        location.replace('/login');
                       }}
                     >
                       {lang[language].HomePage?.header?.logOut}

@@ -14,7 +14,7 @@ export const TemuriylarDavriAuthor = () => {
   return (
     <div>
       <ul className='list-none flex flex-wrap gap-9 mt-9'>
-        {data.length
+        {data?.length
           ? data.map((el) => {
               return (
                 <>

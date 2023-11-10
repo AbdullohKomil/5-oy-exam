@@ -22,6 +22,7 @@ export const lang = {
           searchBtn: 'Izlash',
         },
         mainCategory: {
+          categoryTitle: 'Asosiy kategoriyalar',
           categoryTitle1: 'Temuriylar davri',
           categoryTitle2: 'Jadidlar adabiyoti',
           categoryTitle3: 'Sovet davri',
@@ -51,7 +52,7 @@ export const lang = {
       ProfileSettingPage: {
         ProfileSettingTitle: 'Sozlamalar',
         ProfileSettingLang: 'Tilni tanlang',
-        ProfileSetTheme: 'Theme',
+        ProfileSetTheme: "Qorong'i rejim",
       },
     },
     AddAuthorPage: {
@@ -76,7 +77,7 @@ export const lang = {
   en: {
     HomePage: {
       header: {
-        home: 'Home Page',
+        home: 'Home',
         books: 'Books',
         profile: 'Profile',
         addAuthor: 'Add author',
@@ -96,6 +97,7 @@ export const lang = {
           searchBtn: 'Send',
         },
         mainCategory: {
+          categoryTitle: 'Main categories',
           categoryTitle1: 'Temuriylar period',
           categoryTitle2: 'Jadidlat period',
           categoryTitle3: 'Sovet period',
@@ -125,7 +127,7 @@ export const lang = {
       ProfileSettingPage: {
         ProfileSettingTitle: 'Settings',
         ProfileSettingLang: 'Language',
-        ProfileSetTheme: 'Theme',
+        ProfileSetTheme: 'dark mode',
       },
     },
     AddAuthorPage: {
@@ -150,7 +152,7 @@ export const lang = {
   ru: {
     HomePage: {
       header: {
-        home: 'Главная Страница',
+        home: 'Главная',
         books: 'Книги',
         profile: 'Профиль',
         addAuthor: 'Добавить автор',
@@ -167,9 +169,10 @@ export const lang = {
         search: {
           searchTitle: 'Поиск',
           searchInputPlaceholder: 'Писатели, книги, аудиозаписи, статьи...',
-          searchBtn: 'готова',
+          searchBtn: 'Поиск',
         },
         mainCategory: {
+          categoryTitle: 'Основные категории',
           categoryTitle1: 'Период Тимуридов',
           categoryTitle2: 'Период Джадидов',
           categoryTitle3: 'Советский период',
@@ -199,7 +202,7 @@ export const lang = {
       ProfileSettingPage: {
         ProfileSettingTitle: 'Настройки',
         ProfileSettingLang: 'Язык',
-        ProfileSetTheme: 'Тема',
+        ProfileSetTheme: 'темный режим',
       },
     },
     AddAuthorPage: {

@@ -34,13 +34,10 @@ export const Home = () => {
   const [searchData, setSearchData] = useState([]);
 
   const SearchAuthor = async () => {
-    console.log(inputValueSearch.current.value);
-
     if (inputValueSearch.current.value != '') {
       const data = await api
         .searchAuthor(inputValueSearch.current.value)
-        .catch((err) => console.log(err));
-      console.log(data);
+        .catch((err) => toast.error(err));
       setSearchData(data.data);
     }
     if (
@@ -62,7 +59,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className='pb-9' >
+      <div className='pb-9'>
         <Header />
         <Slider {...settings}>
           <Hero className=''>
@@ -106,7 +103,9 @@ export const Home = () => {
           </Hero>
         </Slider>
         <ShadowFormBox className='dark:bg-black'>
-          <ShadowBoxTitle>Qidirish</ShadowBoxTitle>
+          <ShadowBoxTitle>
+            {lang[language]?.HomePage?.main?.search?.searchTitle}
+          </ShadowBoxTitle>
           <SearchForm onSubmit={handleSearchSubmit}>
             <SearchInput
               className='dark:bg-gray-800 dark:text-white'
@@ -157,7 +156,7 @@ export const Home = () => {
         )}
 
         <h2 className='text-orange-300 text-3xl	text-center mt-44'>
-          Asosiy kategoriyalar
+        {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle}
         </h2>
         <div className='flex justify-between w-2/4 mx-auto mt-5'>
           <NavLink

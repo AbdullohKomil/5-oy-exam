@@ -21,11 +21,10 @@ function App() {
 
   const token = useSelector((state) => state.token.token);
 
-
   dispatch(setToken(localStorage.getItem('token')) || '');
   dispatch(setUser(JSON.parse(localStorage.getItem('user')) || ''));
-  
-  const lang = localStorage.getItem('language')
+
+  const lang = localStorage.getItem('language');
 
   dispatch(setLangUz(lang));
   dispatch(setLangEn(lang));

@@ -5,9 +5,9 @@ import * as Yup from 'yup';
 import { api } from '../../api/api';
 import { useDispatch } from 'react-redux';
 import RegisterIcon from '../../assets/images/Register.svg';
-import axios from 'axios';
 import { setToken } from '../../redux/token/tokenAction';
 import { setUser } from '../../redux/user/userAction';
+import { toast } from 'react-toastify';
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -17,13 +17,19 @@ export const SignUp = () => {
   const validationSchema = Yup.object({
     first_name: Yup.string().required('Required first name'),
     last_name: Yup.string().required('Required last name'),
-    phone: Yup.string().required('required phone !!!'),
+    phone: Yup.string()
+      .required('required phone !!!')
+      .max(9, 'Phone length must be 9 characters long'),
     email: Yup.string()
       .email('invalid email format!!')
       .required('Required email !!!'),
     password: Yup.string()
       .min(3, 'Password must be longer 3 characters')
-      .max(10, 'Password must be last 10 characters')
+      .max(30, 'Password must be last 30 characters')
+      .matches(
+        '[a-zA-Z0-9]{3,30}$',
+        'Matn faqat raqam va harflardan iborat bolishi kerak'
+      )
       .required('Required password !!!'),
   });
 
@@ -36,19 +42,15 @@ export const SignUp = () => {
   };
 
   const userRegister = async (values) => {
-    const data = await api
-      .userRegister(values)
-      .catch((err) => console.log(err));
-
-    console.log(data);
+    const data = await api.userRegister(values).catch((err) => {
+      err.response.data.message ? toast.error(err.response.data.message) : '';
+    });
 
     const user = await api
       .getUser(data?.data?.token || localStorage.getItem('token'))
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
 
-    console.log(user);
-
-    if (data.status === 201) {
+    if (data?.status === 201) {
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('user', JSON.stringify(user.data));
       dispatch(setToken(data.data.token));

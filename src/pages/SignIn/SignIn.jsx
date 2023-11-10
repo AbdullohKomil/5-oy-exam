@@ -18,7 +18,7 @@ export const SignIn = () => {
       .required('Required email !!!'),
     password: Yup.string()
       .min(3, 'Password must be longer 3 characters')
-      .max(10, 'Password must be last 10 characters')
+      .max(30, 'Password must be last 30 characters')
       .required('Required password !!!'),
   });
 
@@ -35,18 +35,12 @@ export const SignIn = () => {
   const userLogin = async (values) => {
     const data = await api.userLogin(values).catch((err) => {
       setErr(err.response.data.message);
-      console.log(err);
+      toast.error(err);
     });
-
-    console.log(data);
 
     const user = await api
       .getUser(data?.data?.token || localStorage.getItem('token'))
-      .catch((err) => console.log(err));
-
-    console.log(user);
-
-    console.log(err);
+      .catch((err) => toast.error(err));
 
     if (err != '') {
       toast.error(err);

@@ -1,11 +1,11 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://book-backend-kj29.onrender.com';
 
 export const api = {
   userLogin: (values) => axios.post(BASE_URL + '/user/login', values),
   userRegister: (values) => axios.post(BASE_URL + '/user/register', values),
   getUser: (token) =>
-    axios.get('http://localhost:5000/user/me', {
+    axios.get('https://book-backend-kj29.onrender.com/user/me', {
       headers: {
         Authorization: token,
       },

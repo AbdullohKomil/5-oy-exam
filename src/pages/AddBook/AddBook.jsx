@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import * as Yup from 'yup';
 import { api } from '../../api/api';
 
-import { FileIconSpan, LabelFile } from './AddBook.styles';
+import { AddBookSpan, FileIconSpan, LabelFile } from './AddBook.styles';
 
 export const AddBook = () => {
   const filesRef = useRef();
@@ -29,7 +29,7 @@ export const AddBook = () => {
     price: Yup.number()
       .typeError('please enter the number')
       .min(5, 'Price must be than 5')
-      .max(2020, 'the price must be less than 2020')
+      .max(1000, 'the price must be less than 1000$')
       .required('Required price !!!'),
     description: Yup.string().required('Required description!!!'),
   });
@@ -46,11 +46,7 @@ export const AddBook = () => {
   const createBookRequest = async (formData) => {
     const data = await api.createBook(formData).catch((err) => setError(err));
 
-    console.log(error);
-
     if (error) {
-      console.log(1);
-
       if (
         error?.response?.data?.message ==
         '"author_id" is not allowed to be empty'
@@ -71,6 +67,16 @@ export const AddBook = () => {
   const CreateBookSubmit = (values) => {
     const formData = new FormData();
 
+    if (!filesRef?.current?.files[0]) {
+      return toast.info('Iltimos rasmni tanlang');
+    }
+
+    if (selectRef?.current?.value == 'noAuthors') {
+      return toast.info(
+        "Author mavjud bo'lmaganligi sababli siz book qosha olmaysiz"
+      );
+    }
+
     const valueFormData = {
       ...values,
       genre_id: GenreSelectRef.current.value,
@@ -79,9 +85,6 @@ export const AddBook = () => {
     };
 
     const keysObject = Object.keys(valueFormData);
-
-    console.log(values);
-    console.log(keysObject);
 
     formData.set(keysObject[0], values.title);
     formData.set(keysObject[1], values.page);
@@ -98,14 +101,28 @@ export const AddBook = () => {
   const [authorGetOptionData, setAuthorGetOptionData] = useState([]);
 
   const changedGenre = async () => {
-    console.log(GenreSelectRef.current.value);
     const data = await api
       .getAuthorByGenre(GenreSelectRef.current.value)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     setAuthorGetOptionData(data.data);
   };
 
-  console.log(authorGetOptionData);
+  const [imgNames, setImgNames] = useState(
+    'Click or drag file to this area to upload'
+  );
+
+  const handleFiles = (e) => {
+    const files = e.target.files;
+    setImgNames([]);
+    if (files.length == 0) {
+      setImgNames('Click or drag file to this area to upload');
+      return toast.error('Iltimos rasmni tanlang');
+    }
+
+    setImgNames((prev) => [
+      ...Array.from(files).map((file) => file.name + ' '),
+    ]);
+  };
 
   return (
     <div className='flex'>
@@ -115,6 +132,7 @@ export const AddBook = () => {
           className='hidden'
           id='file_upload'
           ref={filesRef}
+          onChange={handleFiles}
         />
         <div className='relative'>
           <FileIconSpan></FileIconSpan>
@@ -122,7 +140,7 @@ export const AddBook = () => {
             htmlFor='file_upload'
             className='dark:text-neutral-600'
           >
-            Click or drag file to this area <br /> to upload
+            <AddBookSpan>{imgNames}</AddBookSpan>
           </LabelFile>
         </div>
       </div>
@@ -163,7 +181,7 @@ export const AddBook = () => {
             </span>
             <Field
               name='price'
-              placeholder='Price'
+              placeholder='Price $'
               type='text'
               className='focus:outline-none dark:text-white border py-3 pr-60 mt-3 pl-5 rounded-xl dark:bg-black'
             />
@@ -178,7 +196,6 @@ export const AddBook = () => {
             >
               <option
                 value='dis'
-                selected
                 disabled
               >
                 Genre
@@ -200,7 +217,18 @@ export const AddBook = () => {
                 ))}
               </select>
             ) : (
-              ''
+              <select
+                ref={selectRef}
+                defaultValue={'noAuthors'}
+                className='focus:outline-none border py-3 pr-60 mt-3 pl-5 rounded-xl dark:bg-black dark:text-white'
+              >
+                <option
+                  disabled
+                  value='noAuthors'
+                >
+                  Hozirda author mavjud emas
+                </option>
+              </select>
             )}
             <Field
               type='text'
@@ -219,6 +247,12 @@ export const AddBook = () => {
             </button>
           </Form>
         </Formik>
+        <Link
+          to='/'
+          className='mt-3 font-sans '
+        >
+          Home
+        </Link>
       </div>
     </div>
   );

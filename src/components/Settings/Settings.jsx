@@ -37,7 +37,7 @@ export const Settings = () => {
 
   const [defChecked, setDefChecked] = useState(isChecked);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChangeCheckbox = () => {
     if (CheckboxRef.current.checked == true) {
@@ -85,7 +85,7 @@ export const Settings = () => {
             </LanguageOption>
             <LanguageOption value='uz'>Ozbekcha</LanguageOption>
             <LanguageOption value='en'>English</LanguageOption>
-            <LanguageOption value='ru'>Росисийский</LanguageOption>
+            <LanguageOption value='ru'>русский</LanguageOption>
           </LanguageSelect>
           <p className='mb-2 dark:text-white'>
             {' '}

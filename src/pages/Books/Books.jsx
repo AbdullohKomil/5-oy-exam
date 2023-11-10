@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import Slider from 'react-slick';
 import { api } from '../../api/api';
 import { Header } from '../../components/Header/Header';
+import { LanguageContext } from '../../context/LanguageContext';
+import { lang } from '../../lang/lang';
 import {
   Hero,
   HeroTitle,
@@ -29,9 +31,7 @@ export const Books = () => {
     if (SearchInputRef.current.value != '') {
       const data = await api
         .SearchBook(SearchInputRef.current.value)
-        .catch((err) => console.log(err));
-
-      console.log(data);
+        .catch((err) => toast.error(err));
 
       setSearchData(data.data);
     }
@@ -48,6 +48,7 @@ export const Books = () => {
     evt.preventDefault();
     SearchAuthor();
   };
+  const { language, setLanguage } = useContext(LanguageContext);
 
   return (
     <div>
@@ -59,7 +60,7 @@ export const Books = () => {
           <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <HeroTitle className='font-mono'>
-            Temuriylar davri adabiyoti
+            {lang[language]?.HomePage?.main?.slider?.SliderTitle1}
           </HeroTitle>
         </Hero>
         <Hero className=''>
@@ -68,7 +69,10 @@ export const Books = () => {
           <NavigationSpan className='bg-white'></NavigationSpan>
           <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
-          <HeroTitle className='font-mono'>Jadid davri adabiyoti</HeroTitle>
+          <HeroTitle className='font-mono'>
+            {' '}
+            {lang[language]?.HomePage?.main?.slider?.SliderTitle2}
+          </HeroTitle>
         </Hero>
         <Hero className=''>
           {' '}
@@ -76,7 +80,10 @@ export const Books = () => {
           <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <NavigationSpan className='bg-white'></NavigationSpan>
           <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
-          <HeroTitle className='font-mono'>Sovet davri adabiyoti</HeroTitle>
+          <HeroTitle className='font-mono'>
+            {' '}
+            {lang[language]?.HomePage?.main?.slider?.SliderTitle3}
+          </HeroTitle>
         </Hero>
         <Hero className=''>
           {' '}
@@ -85,16 +92,19 @@ export const Books = () => {
           <NavigationSpan className='bg-bgSliderSpan'></NavigationSpan>
           <NavigationSpan className='bg-white'></NavigationSpan>
           <HeroTitle className='font-mono'>
-            Mustaqillik davri adabiyoti
+            {lang[language]?.HomePage?.main?.slider?.SliderTitle4}
           </HeroTitle>
         </Hero>
       </Slider>
       <ShadowFormBox className='dark:bg-black'>
-        <ShadowBoxTitle>Qidirish</ShadowBoxTitle>
+        <ShadowBoxTitle>            {lang[language]?.HomePage?.main?.search?.searchTitle}
+</ShadowBoxTitle>
         <SearchForm onSubmit={handleSearchSubmit}>
           <SearchInput
             className='dark:bg-gray-800 dark:text-white'
-            placeholder='Adiblar, kitoblar, audiolar, maqolalar...'
+            placeholder={
+              lang[language]?.HomePage?.main?.search?.searchInputPlaceholder
+            }
             type='text'
             ref={SearchInputRef}
           />
@@ -102,7 +112,8 @@ export const Books = () => {
             type='submit'
             className='font-sans dark:text-black'
           >
-            Izlash
+            
+            {lang[language]?.HomePage?.main?.search?.searchBtn}
           </SubmitSearchButton>
         </SearchForm>
       </ShadowFormBox>
@@ -135,7 +146,8 @@ export const Books = () => {
         ''
       )}
       <h2 className='text-orange-300 text-3xl	text-center mt-44'>
-        Asosiy kategoriyalar
+        
+      {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle}
       </h2>
       <div className='flex justify-between w-2/4 mx-auto mt-5'>
         <NavLink
@@ -144,7 +156,8 @@ export const Books = () => {
           }
           to='temuriylarDavriBook'
         >
-          Temuriylar davri
+          
+        {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle1}
         </NavLink>
         <NavLink
           className={({ isActive }) =>
@@ -152,7 +165,8 @@ export const Books = () => {
           }
           to='jadidAdabiyotiBook'
         >
-          Jadid adabiyoti
+          
+        {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle2}
         </NavLink>
         <NavLink
           className={({ isActive }) =>
@@ -160,7 +174,8 @@ export const Books = () => {
           }
           to='sovetDavriBook'
         >
-          Sovet davri
+          
+        {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle3}
         </NavLink>
         <NavLink
           className={({ isActive }) =>
@@ -168,7 +183,8 @@ export const Books = () => {
           }
           to='mustaqillikDavriBook'
         >
-          Mustaqillik davri
+         
+        {lang[language]?.HomePage?.main?.mainCategory?.categoryTitle4}
         </NavLink>
       </div>
       <Outlet />

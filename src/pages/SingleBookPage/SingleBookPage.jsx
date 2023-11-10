@@ -9,16 +9,15 @@ export const SingleBookPage = () => {
   const [data, setData] = useState({});
   const [bookData, setBookData] = useState([]);
   const GetOneBook = async () => {
-    const { data } = await api.SingleBook(id).catch((err) => console.log(err));
+    const { data } = await api.SingleBook(id).catch((err) => toast.error(err));
     setData(data);
   };
 
   const getAuthorBooks = async () => {
     const dataBook = await api
       .SingleBookGetAuthorBooks(data.author_id)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     setBookData(dataBook?.data);
-    console.log(dataBook);
   };
 
   useEffect(() => {

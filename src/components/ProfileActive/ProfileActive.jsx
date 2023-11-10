@@ -24,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../redux/user/userAction';
 import { lang } from '../../lang/lang';
 import { LanguageContext } from '../../context/LanguageContext';
+import { toast } from 'react-toastify';
 
 export const ProfileActive = () => {
   const dispatch = useDispatch();
@@ -53,8 +54,7 @@ export const ProfileActive = () => {
 
   const userEdit = async (values) => {
     const formData = new FormData();
-
-    console.log(values);
+ 
 
     formData.set('first_name', values.first_name);
     formData.set('last_name', values.last_name);
@@ -63,14 +63,12 @@ export const ProfileActive = () => {
 
     const data = await api
       .userEditProfile(formData)
-      .catch((err) => console.log(err));
-
-    console.log(data);
+      .catch((err) => toast.error(err));
 
     if (data) {
       const user = await api
         .getUser(data?.data?.token || localStorage.getItem('token'))
-        .catch((err) => console.log(err));
+        .catch((err) => toast.error(err));
 
       localStorage.setItem('user', JSON.stringify(user.data));
       dispatch(setUser(user.data));
@@ -95,7 +93,7 @@ export const ProfileActive = () => {
                 alt=''
                 className='rounded-full'
                 width='175px'
-               style={{height: '175px'}} 
+                style={{ height: '175px' }}
               />
               <p className='mt-3 text-red-500'>!!!Image is required!!!</p>
             </>
@@ -177,10 +175,7 @@ export const ProfileActive = () => {
                 type='submit'
                 className='dark:bg-white dark:text-black'
               >
-                {
-                  lang[language]?.ProfilePage?.ProfileEditPage
-                    ?.ProfileSaveBtn
-                }
+                {lang[language]?.ProfilePage?.ProfileEditPage?.ProfileSaveBtn}
               </SubmitBtn>
             </RightForm>
           </Formik>

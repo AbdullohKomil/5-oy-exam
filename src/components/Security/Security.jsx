@@ -50,8 +50,6 @@ export const Security = () => {
     const data = await api
       .userEditSecurity(values)
       .catch((err) => setErr(err.response?.data?.message));
-    console.log(values);
-    console.log(data);
 
     if (data?.data == 'updated') {
       toast('Updated! Ozgartirildi!');
@@ -60,9 +58,9 @@ export const Security = () => {
       newEmail.email = values.email;
       localStorage.setItem('user', JSON.stringify(newEmail));
       navigate('/');
-    } 
+    }
     if (err) {
-      toast.error(err)
+      toast.error(err);
     }
   };
 

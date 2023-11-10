@@ -11,20 +11,15 @@ export const SingleAuthorPage = () => {
   const [bookData, setBookData] = useState([]);
 
   const GetOneAuthor = async () => {
-    const data = await api.SingleAuthor(id).catch((err) => console.log(err));
+    const data = await api.SingleAuthor(id).catch((err) => toast.error(err));
     setData(data.data);
   };
-
-  console.log(data);
-
   const GetAuthorBooks = async () => {
     const data = await api
       .SingleAuthorBooks(id)
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
     setBookData(data.data);
   };
-
-  console.log(bookData);
 
   useState(() => {
     GetOneAuthor();
@@ -41,7 +36,7 @@ export const SingleAuthorPage = () => {
               src={'http://localhost:5000/' + data.image}
               alt=''
               width='505px'
-              style={{height :'505px'}}
+              style={{ height: '505px' }}
             />
           </div>
           <div className='right-info w-2/4'>
@@ -57,7 +52,7 @@ export const SingleAuthorPage = () => {
                 </p>
                 <span className='text-gray-400'>{data.country}</span>
               </div>
-              <span className='text-4xl text-orange-200 mt-2' >__</span>
+              <span className='text-4xl text-orange-200 mt-2'>__</span>
               <div className='death-date ml-3 '>
                 <span className='text-gray-400 '>Tavallud sanasi</span>
                 <p className='text-4xl text-orange-200'>{data.date_of_death}</p>
